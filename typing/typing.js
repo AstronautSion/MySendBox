@@ -22,6 +22,9 @@ class Typing{
         this.splitTime = Math.floor( this.setTime / this.text.length );
     }
     typingEvent(){
+        Array.prototype.slice.call(document.querySelectorAll('.is-typing')).map(function(i){
+            i.classList.remove('is-typing');
+        });
         this.target.classList.add('is-typing');
         let typingAni = () =>{
             this.aniTime++;
