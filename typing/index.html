@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="typing.js"></script>
+    <title>Typing Effect</title>
+    
+</head>
+
+<body>
+    <style>
+        .is-typing{position:relative;}
+        .is-typing:after{position:absolute; content:'_'; display:inline; opacity:1; animation: typing .5s .5s ease-in Infinite Alternate;}
+        @keyframes typing{ from {opacity:0;} to {opacity:1;}}
+    </style>
+
+    <div class="typing"></div>
+    
+    <script>
+        var option = {
+            target : '.typing',
+            text: 'Pariatur cupidatat nisi do qui quis dolore ullamco cillum adipisicing id duis est occaecat labore.'
+        };
+
+        new Typing(option, function(target,text){
+            console.log(target);
+            console.log(text);
+        });
+    </script>
+</body>
+</html>
+
+
