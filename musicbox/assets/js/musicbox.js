@@ -1,12 +1,12 @@
-// 유투브 처음시작
+// youtube ready
 function onYoutubePlayerReady(){
     $(document).ready(function(){
         MUSIC_CLASS = new MusicBox();
     });
 }
  
-var timeouts = null;
-// 유투브 change
+let timeouts = null;
+// youtube change
 function onPlayerStateChange(){
     
     if(MUSIC != null){
@@ -148,7 +148,7 @@ class MusicBox {
     }
 
     eventKeyboard(){
-        var that = this;
+        let that = this;
         $(window).on('keydown', function(e){
             if(e.keyCode == 32){ //스페이스바
                 that.btnPlayArea.click();
@@ -180,7 +180,6 @@ class MusicBox {
         });
     }
     eventNextPrev(){
-        let that = this;
         this.btnNext.on('click', function(){
             if(!MUSIC_CHANGE){
                 CONTROL_DIRECTION = 'RIGHT';
@@ -190,6 +189,7 @@ class MusicBox {
                 }else{
                     MUSIC_DATA_COUNT = 0;
                 }
+                
                 MUSIC_ID = getLastPath(MUSIC_DATA[MUSIC_DATA_COUNT].url);
                 MUSIC_TYPE = MUSIC_DATA[MUSIC_DATA_COUNT].type;
                 MUSIC_CHANGE = 1;
@@ -247,7 +247,7 @@ class MusicBox {
 
         function setPlayPosition(e, callback){
             if(that.progressArea.hasClass('is-active')){
-                var c = Math.floor((e.offsetX / that.progressArea[0].clientWidth) * 100);
+                let c = Math.floor((e.offsetX / that.progressArea[0].clientWidth) * 100);
                 if(c <= 100){
                     that.progressBarArea.css({width: c + '%'});
                     MUSIC.seekTo((e.offsetX / that.progressArea[0].clientWidth) * MUSIC.getDuration(),true); 
@@ -279,7 +279,7 @@ class MusicBox {
             }
         }
         function setVolume(e){
-            var c = Math.floor((e.offsetX / that.volume[0].clientWidth) * 100);
+            let c = Math.floor((e.offsetX / that.volume[0].clientWidth) * 100);
             if(c <= 100){
                 that.volumeBarArea.css({width : c + '%'})
                 MUSIC.setVolume(c);    
@@ -293,9 +293,10 @@ class MusicBox {
                 that.progressBarArea.css({width: ( MUSIC.getCurrentTime() / MUSIC.getDuration() ) * 100 + '%' });
                 that.currentTimeArea.text( timeFormat(MUSIC.getCurrentTime()));        
                 that.playProgressAnimation();
-            }else{
+            }else if(MUSIC.getDuration() == MUSIC.getCurrentTime()){
                 cancelAnimationFrame(that._playerCurrentTimes); 
                 that.currentTimeArea.text($(that.durationArea).text());
+                that.btnNext.click();
             }
         }
     }
